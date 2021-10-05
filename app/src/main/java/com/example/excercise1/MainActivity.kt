@@ -1,5 +1,6 @@
 package com.example.excercise1
 
+import android.annotation.SuppressLint
 import android.graphics.Color
 import android.os.Bundle
 import android.view.GestureDetector
@@ -26,6 +27,7 @@ class MainActivity : AppCompatActivity() {
         listOf(Color.BLACK, Color.BLUE, Color.CYAN, Color.DKGRAY, Color.GRAY, Color.LTGRAY,
             Color.RED, Color.GREEN, Color.MAGENTA, Color.YELLOW)
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -77,7 +79,7 @@ class MainActivity : AppCompatActivity() {
             }
             )
 
-        btnAdd.setOnTouchListener { view, motionEvent ->
+        btnAdd.setOnTouchListener { _, motionEvent ->
             gestureDetectorAdd.onTouchEvent(motionEvent)
             if (motionEvent.action == MotionEvent.ACTION_UP) {
                 btnAdd.setBackgroundResource(R.color.white_blue)
@@ -88,7 +90,7 @@ class MainActivity : AppCompatActivity() {
             }
             true
         }
-        btnMinus.setOnTouchListener { view, motionEvent ->
+        btnMinus.setOnTouchListener { _, motionEvent ->
             textChangeColor()
             gestureDetectorMinus.onTouchEvent(motionEvent)
             if (motionEvent.action == MotionEvent.ACTION_UP) {
@@ -107,7 +109,7 @@ class MainActivity : AppCompatActivity() {
         var y: Float
         var _x: Float = 0f
         var _y: Float = 0f
-        relativeLayout.setOnTouchListener { view, motionEvent ->
+        relativeLayout.setOnTouchListener { _, motionEvent ->
             textChangeColor()
             job?.cancel()
             when (motionEvent.action) {
@@ -173,7 +175,7 @@ class MainActivity : AppCompatActivity() {
     private fun textChangeColor() {
         val numb = abs(textView.text.toString().toInt())
         if (numb % 100 == 0 && numb >= 100) {
-            var index = arrColor.random()
+            val index = arrColor.random()
             textView.setTextColor(index)
         }
     }
